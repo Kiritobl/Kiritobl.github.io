@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="编程技术博客 - 分享编程经验、技术文章和学习心得">
-    <title>Kirito's blog</title>
+    <meta name="description" content="技术文章分类 - 编程、算法、工程">
+    <title>文章 - Kirito's blog</title>
     <style>
         * {
             margin: 0;
@@ -80,105 +80,71 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        /* About Section */
-        .about {
-            margin-bottom: 50px;
-            padding-bottom: 30px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .about h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 2em;
-        }
-
-        /* Blog Posts Grid */
-        .blog-posts {
+        .categories {
             margin-bottom: 50px;
         }
 
-        .blog-posts h2 {
+        .categories h2 {
             color: #667eea;
             margin-bottom: 30px;
             font-size: 2em;
         }
 
-        .posts-grid {
+        .categories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
         }
 
-        .post-card {
+        .category-card {
             background: #f8f9fa;
             border-radius: 8px;
             padding: 25px;
             transition: transform 0.3s, box-shadow 0.3s;
             border-left: 4px solid #667eea;
+            cursor: pointer;
         }
 
-        .post-card:hover {
+        .category-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
         }
 
-        .post-card h3 {
+        .category-card h3 {
             color: #333;
             margin-bottom: 10px;
-            font-size: 1.3em;
+            font-size: 1.5em;
         }
 
-        .post-card .date {
-            color: #888;
-            font-size: 0.9em;
+        .category-card p {
+            color: #666;
             margin-bottom: 15px;
         }
 
-        .post-card .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .tag {
-            background: #667eea;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.85em;
-        }
-
-        /* Skills Section */
-        .skills {
-            margin-bottom: 50px;
-        }
-
-        .skills h2 {
+        .category-card a {
+            text-decoration: none;
             color: #667eea;
-            margin-bottom: 30px;
-            font-size: 2em;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-        }
-
-        .skill-item {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
             font-weight: 600;
-            transition: transform 0.3s;
+            display: inline-block;
+            margin-top: 10px;
         }
 
-        .skill-item:hover {
-            transform: scale(1.05);
+        .subcategories {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+
+        .subcategories a {
+            display: block;
+            color: #764ba2;
+            padding: 5px 0;
+            text-decoration: none;
+            transition: padding-left 0.3s;
+        }
+
+        .subcategories a:hover {
+            padding-left: 10px;
+            color: #667eea;
         }
 
         /* Footer */
@@ -210,7 +176,7 @@
                 padding: 20px;
             }
 
-            .posts-grid {
+            .categories-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -219,8 +185,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>🚀 Kirito's blog</h1>
-            <p>分享编程经验 | 技术探索 | 持续学习</p>
+            <h1>📝 文章分类</h1>
+            <p>选择您感兴趣的主题</p>
         </header>
 
         <nav>
@@ -233,41 +199,33 @@
         </nav>
 
         <main>
-            <!-- Welcome Section -->
-            <section class="about">
-                <h2>👋 欢迎来到我的博客</h2>
-                <p>欢迎来到 Kirito's blog！我是一名热爱编程的开发者，专注于分享技术文章、编程经验和学习心得。这里记录了我在编程道路上的探索与成长。</p>
-                <br>
-                <p>在这里你可以找到关于编程、算法和工程实践的各种文章和教程。</p>
-            </section>
-
-            <!-- Quick Links Section -->
-            <section class="blog-posts">
-                <h2>📚 快速导航</h2>
-                <div class="posts-grid">
-                    <article class="post-card">
-                        <h3>📝 文章</h3>
-                        <p>浏览所有技术文章，涵盖编程、算法和工程实践等主题</p>
-                        <div style="margin-top: 20px;">
-                            <a href="articles.html" style="background: #667eea; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block;">查看文章</a>
+            <section class="categories">
+                <h2>📚 文章分类</h2>
+                <div class="categories-grid">
+                    <!-- Programming Category -->
+                    <div class="category-card">
+                        <h3>💻 编程</h3>
+                        <p>各种编程语言的学习心得、代码示例和最佳实践</p>
+                        <div class="subcategories">
+                            <a href="articles/programming/cpp.html">→ C++ 编程</a>
+                            <a href="articles/programming/java.html">→ Java 编程</a>
+                            <a href="articles/programming/python.html">→ Python 编程</a>
                         </div>
-                    </article>
+                    </div>
 
-                    <article class="post-card">
-                        <h3>👤 关于</h3>
-                        <p>了解更多关于我的信息、技术栈和联系方式</p>
-                        <div style="margin-top: 20px;">
-                            <a href="about.html" style="background: #667eea; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block;">了解更多</a>
-                        </div>
-                    </article>
+                    <!-- Algorithms Category -->
+                    <div class="category-card">
+                        <h3>🧮 算法</h3>
+                        <p>算法设计、数据结构、问题解决方法和算法分析</p>
+                        <a href="articles/algorithms.html">查看所有算法文章 →</a>
+                    </div>
 
-                    <article class="post-card">
-                        <h3>💻 GitHub</h3>
-                        <p>查看我的开源项目和代码仓库</p>
-                        <div style="margin-top: 20px;">
-                            <a href="https://github.com/Kiritobl" target="_blank" style="background: #667eea; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block;">访问 GitHub</a>
-                        </div>
-                    </article>
+                    <!-- Engineering Category -->
+                    <div class="category-card">
+                        <h3>🏗️ 工程</h3>
+                        <p>软件工程实践、系统设计、项目管理和开发流程</p>
+                        <a href="articles/engineering.html">查看所有工程文章 →</a>
+                    </div>
                 </div>
             </section>
         </main>

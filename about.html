@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="编程技术博客 - 分享编程经验、技术文章和学习心得">
-    <title>Kirito's blog</title>
+    <meta name="description" content="关于 Kirito - 个人介绍和技术栈">
+    <title>关于 - Kirito's blog</title>
     <style>
         * {
             margin: 0;
@@ -80,11 +80,8 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        /* About Section */
         .about {
             margin-bottom: 50px;
-            padding-bottom: 30px;
-            border-bottom: 2px solid #f0f0f0;
         }
 
         .about h2 {
@@ -93,61 +90,9 @@
             font-size: 2em;
         }
 
-        /* Blog Posts Grid */
-        .blog-posts {
-            margin-bottom: 50px;
-        }
-
-        .blog-posts h2 {
-            color: #667eea;
-            margin-bottom: 30px;
-            font-size: 2em;
-        }
-
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .post-card {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 25px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-left: 4px solid #667eea;
-        }
-
-        .post-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .post-card h3 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-        }
-
-        .post-card .date {
-            color: #888;
-            font-size: 0.9em;
+        .about p {
             margin-bottom: 15px;
-        }
-
-        .post-card .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .tag {
-            background: #667eea;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.85em;
+            line-height: 1.8;
         }
 
         /* Skills Section */
@@ -181,6 +126,37 @@
             transform: scale(1.05);
         }
 
+        /* Contact Section */
+        .contact {
+            margin-bottom: 30px;
+        }
+
+        .contact h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .contact-links a:hover {
+            background: #764ba2;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -209,18 +185,14 @@
             main {
                 padding: 20px;
             }
-
-            .posts-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🚀 Kirito's blog</h1>
-            <p>分享编程经验 | 技术探索 | 持续学习</p>
+            <h1>👋 关于我</h1>
+            <p>了解更多关于 Kirito 的信息</p>
         </header>
 
         <nav>
@@ -233,41 +205,39 @@
         </nav>
 
         <main>
-            <!-- Welcome Section -->
+            <!-- About Section -->
             <section class="about">
-                <h2>👋 欢迎来到我的博客</h2>
-                <p>欢迎来到 Kirito's blog！我是一名热爱编程的开发者，专注于分享技术文章、编程经验和学习心得。这里记录了我在编程道路上的探索与成长。</p>
-                <br>
-                <p>在这里你可以找到关于编程、算法和工程实践的各种文章和教程。</p>
+                <h2>👤 个人简介</h2>
+                <p>欢迎来到我的编程博客！我是 Kirito，一名热爱编程的开发者，专注于分享技术文章、编程经验和学习心得。</p>
+                <p>这里记录了我在编程道路上的探索与成长，包括各种编程语言的学习笔记、算法问题的解决方案，以及软件工程实践的心得体会。</p>
+                <p>我相信知识的分享能够帮助更多人成长，也能让自己在分享的过程中不断提升。希望这个博客能够为你的技术学习之路提供一些帮助。</p>
             </section>
 
-            <!-- Quick Links Section -->
-            <section class="blog-posts">
-                <h2>📚 快速导航</h2>
-                <div class="posts-grid">
-                    <article class="post-card">
-                        <h3>📝 文章</h3>
-                        <p>浏览所有技术文章，涵盖编程、算法和工程实践等主题</p>
-                        <div style="margin-top: 20px;">
-                            <a href="articles.html" style="background: #667eea; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block;">查看文章</a>
-                        </div>
-                    </article>
+            <!-- Skills Section -->
+            <section class="skills">
+                <h2>💻 技术栈</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">C++</div>
+                    <div class="skill-item">Java</div>
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">HTML/CSS</div>
+                    <div class="skill-item">React</div>
+                    <div class="skill-item">Node.js</div>
+                    <div class="skill-item">Git</div>
+                    <div class="skill-item">SQL</div>
+                    <div class="skill-item">Linux</div>
+                    <div class="skill-item">算法</div>
+                    <div class="skill-item">数据结构</div>
+                </div>
+            </section>
 
-                    <article class="post-card">
-                        <h3>👤 关于</h3>
-                        <p>了解更多关于我的信息、技术栈和联系方式</p>
-                        <div style="margin-top: 20px;">
-                            <a href="about.html" style="background: #667eea; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block;">了解更多</a>
-                        </div>
-                    </article>
-
-                    <article class="post-card">
-                        <h3>💻 GitHub</h3>
-                        <p>查看我的开源项目和代码仓库</p>
-                        <div style="margin-top: 20px;">
-                            <a href="https://github.com/Kiritobl" target="_blank" style="background: #667eea; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block;">访问 GitHub</a>
-                        </div>
-                    </article>
+            <!-- Contact Section -->
+            <section class="contact">
+                <h2>📧 联系方式</h2>
+                <div class="contact-links">
+                    <a href="https://github.com/Kiritobl" target="_blank">GitHub</a>
+                    <a href="mailto:your-email@example.com">Email</a>
                 </div>
             </section>
         </main>
