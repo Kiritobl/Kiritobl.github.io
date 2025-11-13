@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="编程技术博客 - 分享编程经验、技术文章和学习心得">
+    <title>Kirito's 编程博客</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #764ba2;
+        }
+
+        /* Main Content */
+        main {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* About Section */
+        .about {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .about h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        /* Blog Posts Grid */
+        .blog-posts {
+            margin-bottom: 50px;
+        }
+
+        .blog-posts h2 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .post-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #667eea;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .post-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .post-card .date {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .post-card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+        }
+
+        /* Skills Section */
+        .skills {
+            margin-bottom: 50px;
+        }
+
+        .skills h2 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .skill-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: opacity 0.3s;
+        }
+
+        footer a:hover {
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Kirito's 编程博客</h1>
+            <p>分享编程经验 | 技术探索 | 持续学习</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#home">首页</a></li>
+                <li><a href="#posts">文章</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li><a href="#about">关于</a></li>
+                <li><a href="https://github.com/Kiritobl" target="_blank">GitHub</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <!-- About Section -->
+            <section class="about" id="about">
+                <h2>👋 关于我</h2>
+                <p>欢迎来到我的编程博客！我是一名热爱编程的开发者，专注于分享技术文章、编程经验和学习心得。这里记录了我在编程道路上的探索与成长。</p>
+            </section>
+
+            <!-- Blog Posts Section -->
+            <section class="blog-posts" id="posts">
+                <h2>📝 最新文章</h2>
+                <div class="posts-grid">
+                    <article class="post-card">
+                        <h3>如何开始学习编程</h3>
+                        <div class="date">2025-11-10</div>
+                        <p>对于编程初学者来说，选择合适的学习路径至关重要。本文将分享一些实用的学习方法和资源推荐...</p>
+                        <div class="tags">
+                            <span class="tag">新手入门</span>
+                            <span class="tag">学习方法</span>
+                        </div>
+                    </article>
+
+                    <article class="post-card">
+                        <h3>JavaScript 异步编程详解</h3>
+                        <div class="date">2025-11-08</div>
+                        <p>深入理解 JavaScript 中的异步编程，包括 Promise、async/await 等核心概念...</p>
+                        <div class="tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">异步编程</span>
+                        </div>
+                    </article>
+
+                    <article class="post-card">
+                        <h3>Git 版本控制最佳实践</h3>
+                        <div class="date">2025-11-05</div>
+                        <p>掌握 Git 是每个开发者的必备技能。本文介绍 Git 的常用命令和工作流程...</p>
+                        <div class="tags">
+                            <span class="tag">Git</span>
+                            <span class="tag">版本控制</span>
+                        </div>
+                    </article>
+
+                    <article class="post-card">
+                        <h3>Python 数据分析入门</h3>
+                        <div class="date">2025-11-01</div>
+                        <p>使用 Python 进行数据分析的基础知识，包括 Pandas、NumPy 等库的使用...</p>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">数据分析</span>
+                        </div>
+                    </article>
+
+                    <article class="post-card">
+                        <h3>Web 开发性能优化技巧</h3>
+                        <div class="date">2025-10-28</div>
+                        <p>提升网站性能的实用技巧，从代码优化到资源加载策略...</p>
+                        <div class="tags">
+                            <span class="tag">性能优化</span>
+                            <span class="tag">Web开发</span>
+                        </div>
+                    </article>
+
+                    <article class="post-card">
+                        <h3>算法与数据结构基础</h3>
+                        <div class="date">2025-10-25</div>
+                        <p>常见算法和数据结构的讲解，帮助你打好编程基础...</p>
+                        <div class="tags">
+                            <span class="tag">算法</span>
+                            <span class="tag">数据结构</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section class="skills" id="skills">
+                <h2>💻 技术栈</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">HTML/CSS</div>
+                    <div class="skill-item">React</div>
+                    <div class="skill-item">Node.js</div>
+                    <div class="skill-item">Git</div>
+                    <div class="skill-item">SQL</div>
+                    <div class="skill-item">Linux</div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Kirito's Blog. All rights reserved.</p>
+            <div>
+                <a href="https://github.com/Kiritobl" target="_blank">GitHub</a>
+                <a href="mailto:your-email@example.com">Email</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
