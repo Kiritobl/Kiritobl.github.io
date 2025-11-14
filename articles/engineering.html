@@ -218,8 +218,15 @@
                         articles.forEach(article => {
                             const articleDiv = document.createElement('div');
                             articleDiv.className = 'article-item';
+                            
+                            // 检测 Markdown 文件
+                            const isMarkdown = article.type === 'markdown' || article.file.endsWith('.md');
+                            const href = isMarkdown 
+                                ? `markdown-viewer.html?file=engineering/${article.file}&category=engineering`
+                                : `engineering/${article.file}`;
+                            
                             articleDiv.innerHTML = `
-                                <h3><a href="engineering/${article.file}">${article.title}</a></h3>
+                                <h3><a href="${href}">${article.title}</a></h3>
                                 <div class="date">${article.date}</div>
                                 <p>${article.description}</p>
                             `;
