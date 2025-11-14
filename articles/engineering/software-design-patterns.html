@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>软件设计模式 - Kirito's blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #764ba2;
+        }
+
+        main {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .breadcrumb {
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .article-meta {
+            color: #888;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        article h2 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        article h3 {
+            color: #764ba2;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+        }
+
+        article p {
+            margin-bottom: 15px;
+        }
+
+        article code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        article pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        article pre code {
+            padding: 0;
+            background: none;
+        }
+
+        article ul, article ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        article li {
+            margin-bottom: 8px;
+        }
+
+        .back-link {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .back-link a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .back-link a:hover {
+            background: #764ba2;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: opacity 0.3s;
+        }
+
+        footer a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            main {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏗️ 软件设计模式</h1>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="../../index.html">首页</a></li>
+                <li><a href="../../articles.html">文章</a></li>
+                <li><a href="../../about.html">关于</a></li>
+                <li><a href="https://github.com/Kiritobl" target="_blank">GitHub</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <div class="breadcrumb">
+                <a href="../../index.html">首页</a> / 
+                <a href="../../articles.html">文章</a> / 
+                <a href="../engineering.html">工程</a> / 
+                <span>软件设计模式</span>
+            </div>
+
+            <div class="article-meta">
+                <span>📅 发布日期：2025-11-14</span> | 
+                <span>📂 分类：工程</span>
+            </div>
+
+            <article>
+                <h2>简介</h2>
+                <p>设计模式是软件开发中常见问题的典型解决方案。它们是被反复使用、多数人知晓、经过分类编目的代码设计经验的总结。本文将介绍常见的设计模式及其应用。</p>
+
+                <h2>设计模式分类</h2>
+                <ul>
+                    <li><strong>创建型模式</strong>：关注对象的创建机制</li>
+                    <li><strong>结构型模式</strong>：关注类和对象的组合</li>
+                    <li><strong>行为型模式</strong>：关注对象之间的通信</li>
+                </ul>
+
+                <h2>创建型模式</h2>
+                
+                <h3>1. 单例模式（Singleton）</h3>
+                <p>确保一个类只有一个实例，并提供全局访问点。</p>
+
+                <p><strong>使用场景：</strong>配置管理器、数据库连接池、日志记录器</p>
+
+                <pre><code>class Singleton:
+    _instance = None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+# 使用
+s1 = Singleton()
+s2 = Singleton()
+print(s1 is s2)  # True</code></pre>
+
+                <h3>2. 工厂模式（Factory）</h3>
+                <p>定义创建对象的接口，让子类决定实例化哪个类。</p>
+
+                <p><strong>使用场景：</strong>不同类型对象的创建、框架设计</p>
+
+                <pre><code>class Animal:
+    def speak(self):
+        pass
+
+class Dog(Animal):
+    def speak(self):
+        return "汪汪！"
+
+class Cat(Animal):
+    def speak(self):
+        return "喵喵！"
+
+class AnimalFactory:
+    @staticmethod
+    def create_animal(animal_type):
+        if animal_type == "dog":
+            return Dog()
+        elif animal_type == "cat":
+            return Cat()
+        else:
+            raise ValueError("未知的动物类型")
+
+# 使用
+factory = AnimalFactory()
+dog = factory.create_animal("dog")
+print(dog.speak())</code></pre>
+
+                <h3>3. 建造者模式（Builder）</h3>
+                <p>将复杂对象的构建与其表示分离，使得同样的构建过程可以创建不同的表示。</p>
+
+                <p><strong>使用场景：</strong>创建复杂对象、对象创建步骤固定但配置可变</p>
+
+                <pre><code>class Computer:
+    def __init__(self):
+        self.cpu = None
+        self.memory = None
+        self.storage = None
+    
+    def __str__(self):
+        return f"CPU: {self.cpu}, Memory: {self.memory}, Storage: {self.storage}"
+
+class ComputerBuilder:
+    def __init__(self):
+        self.computer = Computer()
+    
+    def set_cpu(self, cpu):
+        self.computer.cpu = cpu
+        return self
+    
+    def set_memory(self, memory):
+        self.computer.memory = memory
+        return self
+    
+    def set_storage(self, storage):
+        self.computer.storage = storage
+        return self
+    
+    def build(self):
+        return self.computer
+
+# 使用
+computer = ComputerBuilder() \
+    .set_cpu("Intel i7") \
+    .set_memory("16GB") \
+    .set_storage("512GB SSD") \
+    .build()
+print(computer)</code></pre>
+
+                <h2>结构型模式</h2>
+                
+                <h3>4. 适配器模式（Adapter）</h3>
+                <p>将一个类的接口转换成客户希望的另一个接口。</p>
+
+                <p><strong>使用场景：</strong>系统集成、遗留代码复用</p>
+
+                <pre><code>class EuropeanSocket:
+    def voltage(self):
+        return 230
+
+class USASocket:
+    def voltage(self):
+        return 120
+
+class Adapter:
+    def __init__(self, socket):
+        self.socket = socket
+    
+    def voltage(self):
+        return self.socket.voltage() * 2
+
+# 使用
+usa_socket = USASocket()
+adapter = Adapter(usa_socket)
+print(adapter.voltage())  # 240</code></pre>
+
+                <h3>5. 装饰器模式（Decorator）</h3>
+                <p>动态地给对象添加额外的职责。</p>
+
+                <p><strong>使用场景：</strong>功能扩展、权限控制、日志记录</p>
+
+                <pre><code>class Coffee:
+    def cost(self):
+        return 5
+
+class MilkDecorator:
+    def __init__(self, coffee):
+        self._coffee = coffee
+    
+    def cost(self):
+        return self._coffee.cost() + 2
+
+class SugarDecorator:
+    def __init__(self, coffee):
+        self._coffee = coffee
+    
+    def cost(self):
+        return self._coffee.cost() + 1
+
+# 使用
+coffee = Coffee()
+coffee_with_milk = MilkDecorator(coffee)
+coffee_with_milk_and_sugar = SugarDecorator(coffee_with_milk)
+print(coffee_with_milk_and_sugar.cost())  # 8</code></pre>
+
+                <h3>6. 代理模式（Proxy）</h3>
+                <p>为其他对象提供一个代理以控制对这个对象的访问。</p>
+
+                <p><strong>使用场景：</strong>延迟加载、访问控制、缓存</p>
+
+                <pre><code>class RealImage:
+    def __init__(self, filename):
+        self.filename = filename
+        self.load_from_disk()
+    
+    def load_from_disk(self):
+        print(f"加载图片: {self.filename}")
+    
+    def display(self):
+        print(f"显示图片: {self.filename}")
+
+class ProxyImage:
+    def __init__(self, filename):
+        self.filename = filename
+        self.real_image = None
+    
+    def display(self):
+        if self.real_image is None:
+            self.real_image = RealImage(self.filename)
+        self.real_image.display()
+
+# 使用
+image = ProxyImage("photo.jpg")
+# 图片尚未加载
+image.display()  # 现在才加载图片</code></pre>
+
+                <h2>行为型模式</h2>
+                
+                <h3>7. 观察者模式（Observer）</h3>
+                <p>定义对象间的一对多依赖关系，当一个对象状态改变时，所有依赖它的对象都会得到通知。</p>
+
+                <p><strong>使用场景：</strong>事件系统、MVC 架构、消息订阅</p>
+
+                <pre><code>class Subject:
+    def __init__(self):
+        self._observers = []
+    
+    def attach(self, observer):
+        self._observers.append(observer)
+    
+    def detach(self, observer):
+        self._observers.remove(observer)
+    
+    def notify(self, message):
+        for observer in self._observers:
+            observer.update(message)
+
+class Observer:
+    def __init__(self, name):
+        self.name = name
+    
+    def update(self, message):
+        print(f"{self.name} 收到消息: {message}")
+
+# 使用
+subject = Subject()
+observer1 = Observer("观察者1")
+observer2 = Observer("观察者2")
+
+subject.attach(observer1)
+subject.attach(observer2)
+subject.notify("Hello!")</code></pre>
+
+                <h3>8. 策略模式（Strategy）</h3>
+                <p>定义一系列算法，把它们封装起来，并使它们可以相互替换。</p>
+
+                <p><strong>使用场景：</strong>算法切换、支付方式选择、排序算法</p>
+
+                <pre><code>class PaymentStrategy:
+    def pay(self, amount):
+        pass
+
+class CreditCardPayment(PaymentStrategy):
+    def pay(self, amount):
+        print(f"使用信用卡支付 {amount} 元")
+
+class AlipayPayment(PaymentStrategy):
+    def pay(self, amount):
+        print(f"使用支付宝支付 {amount} 元")
+
+class ShoppingCart:
+    def __init__(self, payment_strategy):
+        self.payment_strategy = payment_strategy
+    
+    def checkout(self, amount):
+        self.payment_strategy.pay(amount)
+
+# 使用
+cart1 = ShoppingCart(CreditCardPayment())
+cart1.checkout(100)
+
+cart2 = ShoppingCart(AlipayPayment())
+cart2.checkout(200)</code></pre>
+
+                <h3>9. 命令模式（Command）</h3>
+                <p>将请求封装成对象，从而可以用不同的请求对客户进行参数化。</p>
+
+                <p><strong>使用场景：</strong>撤销/重做功能、任务队列、日志记录</p>
+
+                <pre><code>class Command:
+    def execute(self):
+        pass
+    
+    def undo(self):
+        pass
+
+class Light:
+    def turn_on(self):
+        print("灯已打开")
+    
+    def turn_off(self):
+        print("灯已关闭")
+
+class LightOnCommand(Command):
+    def __init__(self, light):
+        self.light = light
+    
+    def execute(self):
+        self.light.turn_on()
+    
+    def undo(self):
+        self.light.turn_off()
+
+class RemoteControl:
+    def __init__(self):
+        self.command = None
+    
+    def set_command(self, command):
+        self.command = command
+    
+    def press_button(self):
+        self.command.execute()
+    
+    def press_undo(self):
+        self.command.undo()
+
+# 使用
+light = Light()
+light_on = LightOnCommand(light)
+remote = RemoteControl()
+remote.set_command(light_on)
+remote.press_button()  # 灯已打开
+remote.press_undo()    # 灯已关闭</code></pre>
+
+                <h2>设计原则</h2>
+                
+                <h3>SOLID 原则</h3>
+                <ul>
+                    <li><strong>S - 单一职责原则</strong>：一个类只负责一项职责</li>
+                    <li><strong>O - 开闭原则</strong>：对扩展开放，对修改关闭</li>
+                    <li><strong>L - 里氏替换原则</strong>：子类可以替换父类</li>
+                    <li><strong>I - 接口隔离原则</strong>：使用多个专门的接口</li>
+                    <li><strong>D - 依赖倒置原则</strong>：依赖抽象而不是具体实现</li>
+                </ul>
+
+                <h2>总结</h2>
+                <p>设计模式的核心价值：</p>
+                <ul>
+                    <li><strong>提高代码复用性</strong>：避免重复造轮子</li>
+                    <li><strong>增强可维护性</strong>：代码结构清晰</li>
+                    <li><strong>提升可扩展性</strong>：易于添加新功能</li>
+                    <li><strong>改善团队协作</strong>：统一的设计语言</li>
+                </ul>
+
+                <p>但要注意：</p>
+                <ul>
+                    <li>不要过度设计</li>
+                    <li>根据实际需求选择合适的模式</li>
+                    <li>理解模式的本质而不是死记硬背</li>
+                </ul>
+            </article>
+
+            <div class="back-link">
+                <a href="../engineering.html">← 返回工程文章列表</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Kirito's Blog. All rights reserved.</p>
+            <div>
+                <a href="https://github.com/Kiritobl" target="_blank">GitHub</a>
+                <a href="mailto:your-email@example.com">Email</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

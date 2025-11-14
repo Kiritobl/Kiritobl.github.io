@@ -188,42 +188,45 @@
             <section class="articles-list">
                 <h2>📚 算法文章列表</h2>
                 
-                <!-- Example Articles -->
-                <div class="article-item">
-                    <h3><a href="algorithms/sorting-algorithms.html">排序算法详解</a></h3>
-                    <div class="date">2025-11-13</div>
-                    <p>详细介绍常见的排序算法，包括冒泡排序、快速排序、归并排序等，以及它们的时间复杂度分析。</p>
-                </div>
-
-                <div class="article-item">
-                    <h3><a href="algorithms/binary-search.html">二分查找及其变体</a></h3>
-                    <div class="date">2025-11-11</div>
-                    <p>深入理解二分查找算法，学习各种变体和应用场景。</p>
-                </div>
-
-                <div class="article-item">
-                    <h3><a href="algorithms/dynamic-programming.html">动态规划入门</a></h3>
-                    <div class="date">2025-11-09</div>
-                    <p>学习动态规划的基本思想和解题方法，通过经典例题掌握动态规划。</p>
-                </div>
-
-                <div class="article-item">
-                    <h3><a href="algorithms/graph-algorithms.html">图算法基础</a></h3>
-                    <div class="date">2025-11-07</div>
-                    <p>介绍图的基本概念和常见算法，包括 DFS、BFS、最短路径等。</p>
-                </div>
+                <!-- Articles will be loaded dynamically from articles.json -->
+                <div id="articles-container"></div>
 
                 <div style="margin-top: 30px; padding: 20px; background: #e8f4f8; border-radius: 8px;">
                     <h3 style="color: #667eea; margin-bottom: 10px;">💡 提示</h3>
-                    <p>你可以在 <code>articles/algorithms/</code> 目录下创建新的 HTML 文件，然后在这里添加链接。示例：</p>
-                    <pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; margin-top: 10px; overflow-x: auto;">
-&lt;div class="article-item"&gt;
-    &lt;h3&gt;&lt;a href="algorithms/your-article.html"&gt;文章标题&lt;/a&gt;&lt;/h3&gt;
-    &lt;div class="date"&gt;2025-11-13&lt;/div&gt;
-    &lt;p&gt;文章描述&lt;/p&gt;
-&lt;/div&gt;</pre>
+                    <p>要添加新文章，只需:</p>
+                    <ol style="margin-left: 20px;">
+                        <li>在 <code>articles/algorithms/</code> 目录下创建新的 HTML 文件</li>
+                        <li>在 <code>articles/algorithms/articles.json</code> 中添加文章信息:</li>
+                    </ol>
+                    <pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; margin-top: 10px; overflow-x: auto;">{
+    "title": "你的文章标题",
+    "file": "your-article.html",
+    "date": "2025-11-13",
+    "description": "文章描述"
+}</pre>
+                    <p style="margin-top: 10px;"><strong>文章列表会自动更新，无需修改此页面!</strong></p>
                 </div>
             </section>
+
+            <script>
+                // Load articles from JSON file
+                fetch('algorithms/articles.json')
+                    .then(response => response.json())
+                    .then(articles => {
+                        const container = document.getElementById('articles-container');
+                        articles.forEach(article => {
+                            const articleDiv = document.createElement('div');
+                            articleDiv.className = 'article-item';
+                            articleDiv.innerHTML = `
+                                <h3><a href="algorithms/${article.file}">${article.title}</a></h3>
+                                <div class="date">${article.date}</div>
+                                <p>${article.description}</p>
+                            `;
+                            container.appendChild(articleDiv);
+                        });
+                    })
+                    .catch(error => console.error('Error loading articles:', error));
+            </script>
         </main>
 
         <footer>

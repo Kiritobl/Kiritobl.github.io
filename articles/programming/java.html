@@ -189,36 +189,53 @@
             <section class="articles-list">
                 <h2>📚 Java 文章列表</h2>
                 
-                <!-- Example Article -->
-                <div class="article-item">
-                    <h3><a href="java/java-basics.html">Java 基础入门</a></h3>
-                    <div class="date">2025-11-13</div>
-                    <p>介绍 Java 的基础知识，包括语法、数据类型、面向对象编程等核心概念。</p>
-                </div>
-
-                <div class="article-item">
-                    <h3><a href="java/java-collections.html">Java 集合框架详解</a></h3>
-                    <div class="date">2025-11-11</div>
-                    <p>深入理解 Java 集合框架，包括 List、Set、Map 等常用集合类型的使用和原理。</p>
-                </div>
-
-                <div class="article-item">
-                    <h3><a href="java/java-concurrency.html">Java 并发编程</a></h3>
-                    <div class="date">2025-11-09</div>
-                    <p>学习 Java 多线程编程，包括线程创建、同步机制、并发工具类等内容。</p>
+                <div id="articles-container">
+                    <!-- 文章列表将自动加载 -->
                 </div>
 
                 <div style="margin-top: 30px; padding: 20px; background: #e8f4f8; border-radius: 8px;">
-                    <h3 style="color: #667eea; margin-bottom: 10px;">💡 提示</h3>
-                    <p>你可以在 <code>articles/programming/java/</code> 目录下创建新的 HTML 文件，然后在这里添加链接。示例：</p>
-                    <pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; margin-top: 10px; overflow-x: auto;">
-&lt;div class="article-item"&gt;
-    &lt;h3&gt;&lt;a href="java/your-article.html"&gt;文章标题&lt;/a&gt;&lt;/h3&gt;
-    &lt;div class="date"&gt;2025-11-13&lt;/div&gt;
-    &lt;p&gt;文章描述&lt;/p&gt;
-&lt;/div&gt;</pre>
+                    <h3 style="color: #667eea; margin-bottom: 10px;">💡 添加新文章</h3>
+                    <p>在 <code>articles/programming/java/</code> 目录下创建新的 HTML 文件后，在 <code>articles/programming/articles.json</code> 文件的 <code>java</code> 部分添加条目：</p>
+                    <pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; margin-top: 10px; overflow-x: auto;">{
+  "title": "文章标题",
+  "file": "your-article.html",
+  "date": "2025-11-14",
+  "description": "文章描述"
+}</pre>
+                    <p style="margin-top: 10px;">保存后刷新页面即可看到新文章！</p>
                 </div>
             </section>
+
+            <script>
+                // 自动加载文章列表
+                fetch('../programming/articles.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        const container = document.getElementById('articles-container');
+                        const articles = data.java || [];
+                        
+                        if (articles.length === 0) {
+                            container.innerHTML = '<p style="color: #888;">暂无文章</p>';
+                            return;
+                        }
+                        
+                        articles.forEach(article => {
+                            const articleDiv = document.createElement('div');
+                            articleDiv.className = 'article-item';
+                            articleDiv.innerHTML = `
+                                <h3><a href="java/${article.file}">${article.title}</a></h3>
+                                <div class="date">${article.date}</div>
+                                <p>${article.description}</p>
+                            `;
+                            container.appendChild(articleDiv);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('加载文章列表失败:', error);
+                        document.getElementById('articles-container').innerHTML = 
+                            '<p style="color: #888;">加载文章列表失败</p>';
+                    });
+            </script>
         </main>
 
         <footer>

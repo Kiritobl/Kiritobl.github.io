@@ -188,42 +188,45 @@
             <section class="articles-list">
                 <h2>📚 工程文章列表</h2>
                 
-                <!-- Example Articles -->
-                <div class="article-item">
-                    <h3><a href="engineering/software-design.html">软件设计原则</a></h3>
-                    <div class="date">2025-11-13</div>
-                    <p>介绍 SOLID 原则、设计模式等软件设计的基本原则和最佳实践。</p>
-                </div>
-
-                <div class="article-item">
-                    <h3><a href="engineering/git-workflow.html">Git 工作流程最佳实践</a></h3>
-                    <div class="date">2025-11-12</div>
-                    <p>学习 Git Flow、GitHub Flow 等常见的 Git 工作流程，以及团队协作的最佳实践。</p>
-                </div>
-
-                <div class="article-item">
-                    <h3><a href="engineering/testing.html">软件测试入门</a></h3>
-                    <div class="date">2025-11-10</div>
-                    <p>了解单元测试、集成测试、端到端测试等不同层次的测试方法。</p>
-                </div>
-
-                <div class="article-item">
-                    <h3><a href="engineering/ci-cd.html">CI/CD 持续集成与部署</a></h3>
-                    <div class="date">2025-11-08</div>
-                    <p>学习持续集成和持续部署的概念，使用 GitHub Actions、Jenkins 等工具实现自动化。</p>
-                </div>
+                <!-- Articles will be loaded dynamically from articles.json -->
+                <div id="articles-container"></div>
 
                 <div style="margin-top: 30px; padding: 20px; background: #e8f4f8; border-radius: 8px;">
                     <h3 style="color: #667eea; margin-bottom: 10px;">💡 提示</h3>
-                    <p>你可以在 <code>articles/engineering/</code> 目录下创建新的 HTML 文件，然后在这里添加链接。示例：</p>
-                    <pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; margin-top: 10px; overflow-x: auto;">
-&lt;div class="article-item"&gt;
-    &lt;h3&gt;&lt;a href="engineering/your-article.html"&gt;文章标题&lt;/a&gt;&lt;/h3&gt;
-    &lt;div class="date"&gt;2025-11-13&lt;/div&gt;
-    &lt;p&gt;文章描述&lt;/p&gt;
-&lt;/div&gt;</pre>
+                    <p>要添加新文章，只需:</p>
+                    <ol style="margin-left: 20px;">
+                        <li>在 <code>articles/engineering/</code> 目录下创建新的 HTML 文件</li>
+                        <li>在 <code>articles/engineering/articles.json</code> 中添加文章信息:</li>
+                    </ol>
+                    <pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; margin-top: 10px; overflow-x: auto;">{
+    "title": "你的文章标题",
+    "file": "your-article.html",
+    "date": "2025-11-13",
+    "description": "文章描述"
+}</pre>
+                    <p style="margin-top: 10px;"><strong>文章列表会自动更新，无需修改此页面!</strong></p>
                 </div>
             </section>
+
+            <script>
+                // Load articles from JSON file
+                fetch('engineering/articles.json')
+                    .then(response => response.json())
+                    .then(articles => {
+                        const container = document.getElementById('articles-container');
+                        articles.forEach(article => {
+                            const articleDiv = document.createElement('div');
+                            articleDiv.className = 'article-item';
+                            articleDiv.innerHTML = `
+                                <h3><a href="engineering/${article.file}">${article.title}</a></h3>
+                                <div class="date">${article.date}</div>
+                                <p>${article.description}</p>
+                            `;
+                            container.appendChild(articleDiv);
+                        });
+                    })
+                    .catch(error => console.error('Error loading articles:', error));
+            </script>
         </main>
 
         <footer>

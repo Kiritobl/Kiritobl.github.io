@@ -1,0 +1,26 @@
+{
+  "cpp": [
+    {
+      "title": "C++ 基础入门",
+      "file": "cpp-basics.html",
+      "date": "2025-11-13",
+      "description": "介绍 C++ 的基础知识，包括变量、数据类型、控制流程等核心概念。适合初学者入门学习。"
+    }
+  ],
+  "java": [
+    {
+      "title": "Java 基础入门",
+      "file": "java-basics.html",
+      "date": "2025-11-13",
+      "description": "介绍 Java 的基础知识，包括语法、数据类型、面向对象编程等核心概念。"
+    }
+  ],
+  "python": [
+    {
+      "title": "Python 基础入门",
+      "file": "python-basics.html",
+      "date": "2025-11-13",
+      "description": "介绍 Python 的基础知识，包括语法、数据类型、控制结构等核心概念。"
+    }
+  ]
+}
