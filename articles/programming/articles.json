@@ -5,6 +5,12 @@
       "file": "cpp-basics.html",
       "date": "2025-11-13",
       "description": "介绍 C++ 的基础知识，包括变量、数据类型、控制流程等核心概念。适合初学者入门学习。"
+    },
+    {
+      "title": "C++ set",
+      "file": "cpp-set.html",
+      "date": "2025-11-13",
+      "description": "cpp set 容器的使用方法和常见操作，包括插入、删除、查找元素，以及其底层实现原理和性能分析。"
     }
   ],
   "java": [
