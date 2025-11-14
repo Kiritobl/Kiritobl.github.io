@@ -420,7 +420,13 @@
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
                 
-                const markdown = await response.text();
+                let markdown = await response.text();
+                
+                // 处理被 ````markdown 或 ```markdown 包裹的内容
+                // 移除开头的 ````markdown 或 ```markdown
+                markdown = markdown.replace(/^````markdown\s*\n/, '').replace(/^```markdown\s*\n/, '');
+                // 移除结尾的 ```` 或 ```
+                markdown = markdown.replace(/\n````\s*$/, '').replace(/\n```\s*$/, '');
                 
                 // 解析 Markdown 为 HTML
                 const html = marked.parse(markdown);
