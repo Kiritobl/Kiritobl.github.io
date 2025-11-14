@@ -4,5 +4,11 @@
     "file": "sorting-algorithms.html",
     "date": "2025-11-14",
     "description": "详细介绍常见的排序算法，包括冒泡排序、快速排序、归并排序等，以及它们的时间复杂度分析。"
+  },
+  {
+    "title": "匈牙利算法",
+    "file": "hungarian-algorithm.html",
+    "date": "2025-11-14",
+    "description": "深入讲解匈牙利算法的原理和实现，用于解决二分图最大匹配问题，包括 Hall 定理和增广路径的应用。"
   }
 ]

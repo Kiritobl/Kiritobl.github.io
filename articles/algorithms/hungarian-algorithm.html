@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>匈牙利算法 - Kirito's blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #764ba2;
+        }
+
+        main {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .breadcrumb {
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .article-meta {
+            color: #888;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        article h2 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        article h3 {
+            color: #764ba2;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+        }
+
+        article p {
+            margin-bottom: 15px;
+        }
+
+        article code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        article pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        article pre code {
+            padding: 0;
+            background: none;
+        }
+
+        article ul, article ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        article li {
+            margin-bottom: 8px;
+        }
+
+        .definition-box {
+            background: #e8f4f8;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .theorem-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .algorithm-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .back-link {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .back-link a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .back-link a:hover {
+            background: #764ba2;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: opacity 0.3s;
+        }
+
+        footer a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            main {
+                padding: 20px;
+            }
+        }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔗 匈牙利算法</h1>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="../../index.html">首页</a></li>
+                <li><a href="../../articles.html">文章</a></li>
+                <li><a href="../../about.html">关于</a></li>
+                <li><a href="https://github.com/Kiritobl" target="_blank">GitHub</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <div class="breadcrumb">
+                <a href="../../index.html">首页</a> / 
+                <a href="../../articles.html">文章</a> / 
+                <a href="../algorithms.html">算法</a> / 
+                <span>匈牙利算法</span>
+            </div>
+
+            <div class="article-meta">
+                <span>📅 发布日期：2025-11-14</span> | 
+                <span>📂 分类：算法</span>
+            </div>
+
+            <article>
+                <h2>目标</h2>
+                <p>在二分图中找到<strong>完美匹配（最大匹配）</strong>。</p>
+
+                <h2>基本思想</h2>
+                <p>匈牙利算法的本质是<strong>"贪心 + 回溯"</strong>：为每个未匹配顶点尝试寻找增广路径，若当前路径不可行则回溯调整已匹配顶点的连接关系。</p>
+                
+                <p><strong>核心逻辑：</strong>对 U 集中每个顶点依次执行"找增广路径"操作，每找到一条增广路径，匹配边数就增加 1，直至遍历所有顶点。</p>
+
+                <h2>核心概念</h2>
+
+                <div class="definition-box">
+                    <h3>二分图</h3>
+                    <p><strong>二分图 \(G=(X,Y,E)\)：</strong></p>
+                    <ul>
+                        <li>\(X\) 是左侧顶点集</li>
+                        <li>\(Y\) 是右侧顶点集</li>
+                        <li>\(E\) 是边集</li>
+                    </ul>
+                </div>
+
+                <div class="definition-box">
+                    <h3>饱和顶点与非饱和顶点</h3>
+                    <ul>
+                        <li><strong>饱和顶点：</strong>在匹配 \(M\) 中被包含的顶点（有对应匹配边）</li>
+                        <li><strong>非饱和顶点：</strong>未被包含的顶点</li>
+                    </ul>
+                </div>
+
+                <div class="definition-box">
+                    <h3>邻域</h3>
+                    <p><strong>\(N(S)\)：</strong>集合 \(S\)（\(X\) 的子集）的"邻域"，即与 \(S\) 中顶点直接相连的 \(Y\) 中顶点的集合。</p>
+                </div>
+
+                <div class="definition-box">
+                    <h3>对称差集</h3>
+                    <p><strong>\(M \Delta E(P)\)：</strong>匹配 \(M\) 与增广路径 \(P\) 的边集的对称差集。</p>
+                    <p>简单说：删除 \(P\) 中已在 \(M\) 的边，添加 \(P\) 中不在 \(M\) 的边，实现匹配扩展。</p>
+                </div>
+
+                <h2>Hall 定理</h2>
+
+                <div class="theorem-box">
+                    <h3>定理（Hall 定理）</h3>
+                    <p>设 \(G=(X, Y)\) 是偶图，则 \(G\) 存在饱和 \(X\) 每个顶点的匹配的<strong>充要条件</strong>是：</p>
+                    <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+                        对 \(X\) 的任意子集 \(S\)，都有 \(|N(S)| \ge |S|\)
+                    </p>
+                    <p>这个定理为判断二分图是否存在完美匹配提供了理论依据。</p>
+                </div>
+
+                <h2>算法实现</h2>
+
+                <div class="algorithm-box">
+                    <h3>匈牙利算法步骤</h3>
+                    <p><strong>初始化：</strong>以任一匹配 \(M\) 作为开始（可取 \(M=\emptyset\)）</p>
+                    
+                    <p><strong>a) 判断是否完美匹配</strong></p>
+                    <ul>
+                        <li><strong>YES：</strong>停止，\(M\) 为完美匹配</li>
+                        <li><strong>NO：</strong>取 \(X\) 中 \(M\) 非饱和顶点 \(u\)，置 \(S=\{u\}\)，\(T=\emptyset\)，转到 b)</li>
+                    </ul>
+
+                    <p><strong>b) 判断邻域条件</strong></p>
+                    <ul>
+                        <li><strong>判断是否 \(N(S)=T\)？</strong></li>
+                        <li><strong>YES：</strong>停止，根据 Hall 定理，\(G\) 中不存在完美匹配（当前找到的为最大匹配）</li>
+                        <li><strong>NO：</strong>否则设 \(y \in N(S) - T\)，转到 c)</li>
+                    </ul>
+
+                    <p><strong>c) 判断饱和状态</strong></p>
+                    <ul>
+                        <li><strong>判断 \(y\) 是否为 \(M\) 饱和点？</strong></li>
+                        <li><strong>YES：</strong>设 \(yz \in M\)，置 \(S=S \cup \{z\}\)，\(T=T \cup \{y\}\)，转 b)</li>
+                        <li><strong>NO：</strong>设 \(u\) 到 \(y\) 为 \(M\) 的可扩路 \(P\)，置 \(M_1=M \Delta E(P)\)，转 a)</li>
+                    </ul>
+                </div>
+
+                <h2>算法要点</h2>
+                <ul>
+                    <li>步骤 b) 和 c) 的过程实际上是在<strong>寻找可扩展路径</strong>的操作</li>
+                    <li>每次引入 \(S\)、\(T\) 的操作其实就是<strong>拓展路径延伸</strong>的操作</li>
+                    <li>通过不断调整已匹配的边，尝试为新顶点找到匹配</li>
+                    <li>如果无法找到增广路径，则当前匹配为最大匹配</li>
+                </ul>
+
+                <h2>Python 实现</h2>
+
+                <pre><code>def hungarian_algorithm(graph):
+    """
+    匈牙利算法实现二分图最大匹配
+    
+    参数:
+        graph: dict, 邻接表表示的二分图 {u: [v1, v2, ...]}
+    
+    返回:
+        match: dict, 匹配结果 {右顶点: 左顶点}
+    """
+    match = {}  # 右侧顶点的匹配
+    
+    def dfs(u, visited):
+        """深度优先搜索寻找增广路径"""
+        for v in graph.get(u, []):
+            if v not in visited:
+                visited.add(v)
+                # 如果 v 未匹配或者能为 v 的匹配找到新的匹配
+                if v not in match or dfs(match[v], visited):
+                    match[v] = u
+                    return True
+        return False
+    
+    # 对每个左侧顶点尝试找增广路径
+    for u in graph:
+        visited = set()
+        dfs(u, visited)
+    
+    return match
+
+
+# 示例使用
+if __name__ == "__main__":
+    # 构建二分图：左侧顶点 -> 右侧顶点列表
+    bipartite_graph = {
+        'A': [1, 2, 3],
+        'B': [1, 4],
+        'C': [3, 4],
+        'D': [2, 4]
+    }
+    
+    result = hungarian_algorithm(bipartite_graph)
+    print("匹配结果：")
+    for right, left in result.items():
+        print(f"  {left} -> {right}")
+    
+    print(f"\n最大匹配数：{len(result)}")</code></pre>
+
+                <h2>时间复杂度</h2>
+                <ul>
+                    <li><strong>最坏情况：</strong>\(O(VE)\)，其中 \(V\) 是顶点数，\(E\) 是边数</li>
+                    <li>对于每个左侧顶点，可能需要遍历所有边来找增广路径</li>
+                    <li>通过优化可以达到 \(O(\sqrt{V}E)\)（使用 Hopcroft-Karp 算法）</li>
+                </ul>
+
+                <h2>应用场景</h2>
+                <ul>
+                    <li><strong>任务分配问题：</strong>将 n 个任务分配给 m 个工人</li>
+                    <li><strong>婚姻匹配问题：</strong>n 个男生和 m 个女生的配对</li>
+                    <li><strong>资源调度：</strong>时间槽分配、教室安排等</li>
+                    <li><strong>网络流问题：</strong>作为最大流算法的特例</li>
+                </ul>
+
+                <h2>总结</h2>
+                <p>匈牙利算法通过不断寻找增广路径来扩展匹配，是解决二分图最大匹配问题的经典算法。理解其核心思想（贪心+回溯）和 Hall 定理，有助于深入掌握图论中的匹配问题。</p>
+
+                <h3>关键点回顾</h3>
+                <ul>
+                    <li>增广路径是匹配数增加的关键</li>
+                    <li>Hall 定理提供了完美匹配存在的充要条件</li>
+                    <li>DFS 是寻找增广路径的常用方法</li>
+                    <li>算法的正确性基于增广路径定理</li>
+                </ul>
+            </article>
+
+            <div class="back-link">
+                <a href="../algorithms.html">← 返回算法文章列表</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Kirito's Blog. All rights reserved.</p>
+            <div>
+                <a href="https://github.com/Kiritobl" target="_blank">GitHub</a>
+                <a href="mailto:your-email@example.com">Email</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
